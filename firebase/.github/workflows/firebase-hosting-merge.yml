@@ -29,10 +29,9 @@ jobs:
           mkdir -p firebase/public
           cp -r frontend/build/* firebase/public/
 
-      - name: Deploy to Firebase Hosting
-        uses: FirebaseExtended/action-hosting-deploy@v0
+           - name: Deploy Hosting + Functions
+        uses: w9jds/firebase-action@v2.2.0
         with:
-          repoToken: ${{ secrets.GITHUB_TOKEN }}
-          firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_AI_WORKOUT_ANALYZER }}
-          channelId: live
-          projectId: ai-workout-analyzer
+          args: deploy --only hosting,functions
+        env:
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_DEPLOY_TOKEN }}
